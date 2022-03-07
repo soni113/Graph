@@ -1,0 +1,19 @@
+class Solution {
+         Map<Node, Node> map = new HashMap<>();
+    
+    public Node cloneGraph(Node root) {
+        if (root == null) return null;
+    
+        if (map.containsKey(root)) 
+            return map.get(root);
+        
+        ArrayList<Node> neighbors = new ArrayList<>();
+        Node clone = new Node(root.val, neighbors);
+        map.put(root, clone);
+        for (Node neighbor : root.neighbors) {
+            clone.neighbors.add(cloneGraph(neighbor));
+        }
+        
+        return clone;
+    }
+}
